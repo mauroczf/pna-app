@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::group(['middleware' => 'api'], function () {
-        Route::resource('users', 'API\UserController')->except(['create', 'show', 'edit']);
+        Route::resource('produtos', 'ProdutoController')->except(['create', 'edit']);
         // essas rotas podem acessar a aplicação sem precisar de autenticação
     });
 });

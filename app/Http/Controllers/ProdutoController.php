@@ -14,9 +14,8 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        //
+        return $lists = Produto::all();
     }
-
     /**
      * Store a newly created resource in storage.
      *
