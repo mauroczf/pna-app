@@ -14,7 +14,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        return $lists = Produto::all();
+        return Produto::get();
     }
     /**
      * Store a newly created resource in storage.
@@ -24,7 +24,11 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->input();
+        return $keyword = Request::create([
+            'titulo' => $request->input('titulo'),
+            'desc' => $request->input('desc'),
+        ]);
     }
 
     /**
