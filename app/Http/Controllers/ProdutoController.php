@@ -14,7 +14,11 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        return Produto::get();
+        $produtos = Produto::get();
+        return [
+            'produto' => $produtos,
+            'mensagem' => "Registro de produtos",
+        ];
     }
     /**
      * Store a newly created resource in storage.
@@ -25,21 +29,28 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
-        return $keyword = Request::create([
-            'titulo' => $request->input('titulo'),
-            'desc' => $request->input('desc'),
+        Produto::create([
+            'titulo' => $data['titulo'],
+            'desc' => $data['desc'],
         ]);
+        return [
+            'produto' => $data,
+            'mensagem' => "Registro armazenado com sucesso",
+        ];
     }
-
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function show(Produto $produto)
+    public function show($id)
     {
-        //
+        $produto = Produto::find($id);
+        return [
+            'produto' => $produto,
+            'mensagem' => "Registro listado com sucesso",
+        ];
     }
 
     /**
@@ -49,9 +60,18 @@ class ProdutoController extends Controller
      * @param  \App\Models\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produto $produto)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->input();
+        $produto = Produto::find($id);
+        $produto->titulo = $data['titulo'];
+        $produto->desc = $data['desc'];
+        $produto->save();
+        $produto = Produto::find($id);
+        return [
+            'produto' => $produto,
+            'mensagem' => "Registro atualizado com sucesso",
+        ];
     }
 
     /**
@@ -60,8 +80,12 @@ class ProdutoController extends Controller
      * @param  \App\Models\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produto $produto)
+    public function destroy($id)
     {
-        //
+        $produto = Produto::find($id)->delete();
+        return [
+            'produto' => $produto,
+            'mensagem' => "Registro deletado com sucesso",
+        ];
     }
 }
