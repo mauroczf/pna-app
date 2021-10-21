@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produto;
+use App\Models\Livro;
 use Illuminate\Http\Request;
 
-class ProdutoController extends Controller
+class LivroController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +14,13 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::get();
+        $livros = Livro::get();
         return [
-            'produto' => $produtos,
+            'livro' => $livros,
             'mensagem' => "Registros listados com sucesso",
         ];
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -29,26 +30,28 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
-        Produto::create([
-            'nome_produto' => $data['nome_produto'],
+        Livro::create([
+            'titulo' => $data['titulo'],
+            'autor' => $data['autor'],
             'desc' => $data['desc'],
         ]);
         return [
-            'produto' => $data,
+            'titulo' => $data,
             'mensagem' => "Registro criado com sucesso",
         ];
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Produto  $produto
+     * @param  \App\Models\Livro  $livro
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $produto = Produto::find($id);
+        $livros = Livro::find($id);
         return [
-            'produto' => $produto,
+            'titulo' => $livros,
             'mensagem' => "Registro listado com sucesso",
         ];
     }
@@ -57,34 +60,34 @@ class ProdutoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Produto  $produto
+     * @param  \App\Models\Livro  $livro
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $data = $request->input();
-        $produto = Produto::find($id);
-        $produto->nome_produto = $data['nome_produto'];
-        $produto->desc = $data['desc'];
-        $produto->save();
-        $produto = Produto::find($id);
+        $livros = Livro::find($id);
+        $livros->titulo = $data['titulo'];
+        $livros->autor = $data['autor'];
+        $livros->desc = $data['desc'];
+        $livros->save();
+        $livros = Livro::find($id);
         return [
-            'produto' => $produto,
+            'titulo' => $livros,
             'mensagem' => "Registro atualizado com sucesso",
         ];
     }
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Produto  $produto
+     * @param  \App\Models\Livro  $livro
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $produto = Produto::find($id)->delete();
+        $livros = Livro::find($id)->delete();
         return [
-            'produto' => $produto,
+            'titulo' => $livros,
             'mensagem' => "Registro deletado com sucesso",
         ];
     }

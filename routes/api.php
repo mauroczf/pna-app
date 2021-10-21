@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::group(['middleware' => 'api'], function () {
         Route::resource('produtos', 'ProdutoController')->except(['create', 'edit']);
+        Route::resource('livros', 'LivroController')->except(['create', 'edit']);
         // essas rotas podem acessar a aplicação sem precisar de autenticação
     });
 });
