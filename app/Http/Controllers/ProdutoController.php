@@ -17,7 +17,7 @@ class ProdutoController extends Controller
         $produtos = Produto::get();
         return [
             'produto' => $produtos,
-            'mensagem' => "Registro de produtos",
+            'mensagem' => "Registros listados com sucesso",
         ];
     }
     /**
@@ -35,7 +35,7 @@ class ProdutoController extends Controller
         ]);
         return [
             'produto' => $data,
-            'mensagem' => "Registro armazenado com sucesso",
+            'mensagem' => "Registro criado com sucesso",
         ];
     }
     /**
